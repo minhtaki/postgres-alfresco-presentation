@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background-image="images/title_background.png" data-background-size="contain">
+            <div class="right">
+                <h2 style="color: black;">PosgreSQL for Alfresco</h2>
+                <h4 style="color: black;">The Practical Guide</h4>
+                <p>
+                    <small>
+                        Created by Thijs Lemmens
+                    </small>
+                </p>
+            </div>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Outline</h2>
+            <h3 style="color: black;">Administration</h3>
+            <ul>
+                <li>HA: Master - Slave Failover</li>
+                <li>Continuous backup - Point-in-time Recovery</li>
+                <li>Database upgrade without downtime</li>
+            </ul>
+        </section>
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Outline</h2>
+            <h3 style="color: black;">Development</h3>
+            <ul>
+                <li>Resolve Alfresco Paths with recursive queries</li>
+                <li>Export your repository to CSV</li>
+                <li>alf_node_properties to JSON conversion</li>
+            </ul>
+        </section>
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <h2>Administration</h2>
+        </section>
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Streaming Replication</h2>
+        </section>
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <img src="images/master-slave.png" />
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Dilemma: Synchronous vs Asynchronous</h2>
+            <ul>
+                <li class="fragment grow">Waiting for the remote.</li>
+                <li class="fragment grow">When the slave goes down.</li>
+                <li class="fragment grow">What to do on failover?</li>
+            </ul>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Configuration: Master</h2>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Configuration: Slave</h2>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Configuration: Alfresco</h2>
+        </section>
+
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <h2>DEMO: Failover</h2>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Streaming backup</h2>
+        </section>
+
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <h2>DEMO: Point in Time Recovery</h2>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Logical Replication</h2>
+        </section>
+
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <h2>DEMO: DB Upgrade without downtime</h2>
+        </section>
+
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <h2>Development</h2>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2>Sources</h2>
+            <ul>
+                <li><a href="https://blog.2ndquadrant.com/evolution-of-fault-tolerance-in-postgresql-replication-phase/">https://blog.2ndquadrant.com/evolution-of-fault-tolerance-in-postgresql-replication-phase/</a></li>
+                <li><a href="https://www.postgresql.org/docs">https://www.postgresql.org/docs</a></li>
+                <li><a href="https://rosenfeld.herokuapp.com/en/articles/infrastructure/2017-11-10-upgrading-postgresql-from-9-6-to-10-with-minimal-downtime-using-pglogical">https://rosenfeld.herokuapp.com/en/articles/infrastructure/2017-11-10-upgrading-postgresql-from-9-6-to-10-with-minimal-downtime-using-pglogical</a> </li>
+            </ul>
+        </section>
+
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            { src: 'plugin/markdown/marked.js' },
+            { src: 'plugin/markdown/markdown.js' },
+            { src: 'plugin/notes/notes.js', async: true },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>
+</html>
