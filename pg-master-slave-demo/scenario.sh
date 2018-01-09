@@ -11,3 +11,5 @@ docker-compose stop pgmaster
 #Check if Alfresco works (read only)
 #Promote the slave to master
 docker exec --user=postgres pgmasterslavedemo_pgslave_1 pg_ctl promote
+
+#Now we can again add new data to alfresco
