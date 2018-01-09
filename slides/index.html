@@ -39,24 +39,11 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Outline</h2>
-            <h3 style="color: black;">Administration</h3>
             <ul>
                 <li>HA: Master - Slave Failover</li>
                 <li>Continuous backup - Point-in-time Recovery</li>
                 <li>Database upgrade without downtime</li>
             </ul>
-        </section>
-        <section data-background-image="images/default_background.png" data-background-size="contain">
-            <h2 style="color: black;">Outline</h2>
-            <h3 style="color: black;">Development</h3>
-            <ul>
-                <li>Resolve Alfresco Paths with recursive queries</li>
-                <li>Export your repository to CSV</li>
-                <li>alf_node_properties to JSON conversion</li>
-            </ul>
-        </section>
-        <section data-background-image="images/blue_background.png" data-background-size="contain">
-            <h2>Administration</h2>
         </section>
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Streaming Replication</h2>
@@ -76,14 +63,32 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Configuration: Master</h2>
+            <pre>postgresql.conf:
+            <code data-trim data-noescape>
+            wal_level = logical
+            max_wal_senders = 20
+            max_replication_slots = 20
+            </code>
+            </pre>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Configuration: Master</h2>
+            <pre>pg_hba.conf:
+                <code data-trim data-noescape>
+                host replication repuser 172.18.0.0 255.255.255.0 md5
+            </code>
+            </pre>
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Configuration: Slave</h2>
+            <pre>pg_basebackup -D datadir -X stream -R -P <br />-d "host=pgmaster port=5432 user=repuser password=pwd"</pre>
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Configuration: Alfresco</h2>
+            <pre>jdbc:postgresql://pgmaster:5432,pgslave:5432/alfresco?</pre>
         </section>
 
         <section data-background-image="images/blue_background.png" data-background-size="contain">
@@ -92,6 +97,30 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Streaming backup</h2>
+            <ul>
+                <li>start from a base backup</li>
+                <li>archive the wal files</li>
+            </ul>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Streaming backup: configuration</h2>
+            <pre>postgresql.conf:
+                <code data-trim data-noescape>
+                archive_mode = on
+                archive_command = 'test ! -f /wal_archive/%f && cp %p /wal_archive/%f'
+            </code>
+            </pre>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">restore: configuration</h2>
+            <pre>recovery.conf:
+                <code data-trim data-noescape>
+                restore_command = 'cp /wal_archive/%f %p'
+                recovery_target_time = '2018-01-09 09:39:50'
+            </code>
+            </pre>
         </section>
 
         <section data-background-image="images/blue_background.png" data-background-size="contain">
@@ -111,7 +140,7 @@
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
-            <h2>Sources</h2>
+            <h2 style="color: black;">Sources</h2>
             <ul>
                 <li><a href="https://blog.2ndquadrant.com/evolution-of-fault-tolerance-in-postgresql-replication-phase/">https://blog.2ndquadrant.com/evolution-of-fault-tolerance-in-postgresql-replication-phase/</a></li>
                 <li><a href="https://www.postgresql.org/docs">https://www.postgresql.org/docs</a></li>

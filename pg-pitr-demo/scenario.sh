@@ -14,7 +14,7 @@ docker-compose stop pgrecovery
 # Record time
 docker exec --user=postgres pgpitrdemo_postgres_1 psql -c "SELECT NOW();"
 
-# Add 2nd document
+# Remove document, also from trash
 # stop Alfresco
 docker-compose stop alfresco-core
 docker-compose rm alfresco-core
