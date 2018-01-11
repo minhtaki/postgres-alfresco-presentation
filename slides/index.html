@@ -129,14 +129,40 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Logical Replication</h2>
+            <ul>
+                <li>addon from 2nd Quadrant</li>
+                <li>sql-like replication of changes to a db</li>
+                <li>cross version (9.4 -> 10)</li>
+                <li>built in version in postgresql 10</li>
+                <li>per database replication</li>
+            </ul>
         </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Logical Replication Setup on old version</h2>
+            <ul>
+                <li>Dump the database (scheme only)</li>
+                <li>Create the extension</li>
+                <li>Create provider node</li>
+                <li>Register tables to provider</li>
+                <li>Register sequences to subscriber</li>
+            </ul>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Logical Replication Setup on new version</h2>
+            <ul>
+                <li>Restore the database (scheme only)</li>
+                <li>Create the extension</li>
+                <li>Create subscriber node</li>
+                <li>Register subscription to provider</li>
+            </ul>
+        </section>
+
+
 
         <section data-background-image="images/blue_background.png" data-background-size="contain">
             <h2>DEMO: DB Upgrade without downtime</h2>
-        </section>
-
-        <section data-background-image="images/blue_background.png" data-background-size="contain">
-            <h2>Development</h2>
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
