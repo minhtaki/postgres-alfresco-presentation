@@ -4,7 +4,7 @@
 docker-compose up -d
 
 #dump the alfresco database
-docker exec pgupgradedemo_postgresql96_1 pg_dump -Fc -s -U alfresco alfresco -f alfresco.dump
+docker exec pgupgradedemo_postgresql96_1 pg_dump -Fc -s -U alfresco alfresco -f /share/alfresco.dump
 
 #create extension pglogical on 96
 docker exec pgupgradedemo_postgresql96_1 psql -c 'create extension pglogical;' -U alfresco alfresco

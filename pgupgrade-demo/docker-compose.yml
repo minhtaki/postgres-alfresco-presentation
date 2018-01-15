@@ -3,7 +3,7 @@ version: '3'
 services:
 
   alfresco-core:
-    image: hub.xenit.eu/alfresco-ethias:latest
+    image: hub.xenit.eu/alfresco-enterprise-war-core:5.2
     volumes:
     - alfresco:/opt/alfresco/alf_data
     restart: unless-stopped
@@ -61,8 +61,8 @@ services:
     - PGHBA_1=local all all trust
     - PGHBA_2=host all all 127.0.0.1/32 trust
     - PGHBA_3=host alfresco alfresco all md5
-    - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
-    - PGHBA_5=host alfresco postgres 172.18.0.0 255.255.255.0 trust
+    - PGHBA_4=host replication postgres 172.0.0.0 255.0.0.0 trust
+    - PGHBA_5=host alfresco postgres 172.0.0.0 255.0.0.0 trust
     restart: unless-stopped
 
   postgresql10:
@@ -92,8 +92,8 @@ services:
     - PGHBA_1=local all all trust
     - PGHBA_2=host all all 127.0.0.1/32 trust
     - PGHBA_3=host alfresco alfresco all md5
-    - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
-    - PGHBA_5=host alfresco postgres 172.18.0.0 255.255.255.0 trust
+    - PGHBA_4=host replication postgres 172.0.0.0 255.0.0.0 trust
+    - PGHBA_5=host alfresco postgres 172.0.0.0 255.0.0.0 trust
     restart: unless-stopped
 
   jodconverter:
