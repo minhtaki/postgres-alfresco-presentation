@@ -16,7 +16,7 @@ docker exec --user=postgres pgpitrdemo_postgres_1 psql -c "SELECT NOW();"
 
 # edit recovery.conf
 #restore_command = 'cp /wal_archive/%f %p'
-#recovery_target_time = '2018-01-09 09:39:50'
+#recovery_target_time = '2018-01-15 14:21:27.300065+00'
 #recovery_target_action = promote
 
 #show the xlog files
