@@ -98,17 +98,13 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Configuration: Slave</h2>
-            <pre>pg_basebackup --pgdata=datadir --xlog-method=stream --write-recovery-conf --progress <br />--dbname="host=pgmaster port=5432 user=repuser password=pwd"</pre>
+            <pre>pg_basebackup --pgdata=datadir --xlog-method=stream <br /> --write-recovery-conf --progress <br />--dbname="host=pgmaster port=5432 user=repuser password=pwd"</pre>
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Configuration: Alfresco</h2>
             <pre>jdbc:postgresql://pgmaster:5432,pgslave:5432/alfresco
             </pre>
-        </section>
-
-        <section data-background-image="images/blue_background.png" data-background-size="contain">
-            <h2>DEMO: Failover</h2>
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
@@ -158,6 +154,10 @@
                 </ul>
             </div>
 
+        </section>
+
+        <section data-background-image="images/blue_background.png" data-background-size="contain">
+            <img src="images/pglogical.jpg" />
         </section>
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
