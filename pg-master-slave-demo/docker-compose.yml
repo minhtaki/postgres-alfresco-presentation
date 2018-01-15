@@ -51,9 +51,7 @@ services:
     - PGCONF_log_autovacuum_min_duration=0
     - PGCONF_log_error_verbosity=default
     - PGCONF_log_min_duration_statement=100
-#    - PGCONF_log_duration=on
-    - "PGCONF_shared_preload_libraries=pglogical"
-    - "PGCONF_wal_level=logical"
+    - "PGCONF_wal_level=hot_standby"
     - "PGCONF_max_wal_senders=20"
     - "PGCONF_max_replication_slots=20"
     - PGCONF_hot_standby=on
@@ -64,33 +62,31 @@ services:
     - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
     restart: unless-stopped
 
-#  pgslave:
-#    image: hub.xenit.eu/postgres:9.6.6
-#    volumes:
-#    - pgslave:/var/lib/postgresql/data
-#    environment:
-#    - "PGCONF_log_line_prefix='%t [%p]: [%l-1] db=%d,user=%u,app=%a,client=%h '"
-#    - PGCONF_log_checkpoints=on
-#    - PGCONF_log_connections=on
-#    - PGCONF_log_disconnections=on
-#    - PGCONF_log_lock_waits=on
-#    - PGCONF_log_temp_files=0
-#    - PGCONF_log_autovacuum_min_duration=0
-#    - PGCONF_log_error_verbosity=default
-#    - PGCONF_log_min_duration_statement=100
-##    - PGCONF_log_duration=on
-#    - "PGCONF_shared_preload_libraries=pglogical"
-#    - "PGCONF_wal_level=logical"
-#    - "PGCONF_max_wal_senders=20"
-#    - "PGCONF_max_replication_slots=20"
-#    - PGCONF_hot_standby=on
-#    - PGHBAREPLACE=true
-#    - PGHBA_1=local all all trust
-#    - PGHBA_2=host all all 127.0.0.1/32 trust
-#    - PGHBA_3=host all all all md5
-#    - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
-#    - "PG_BASEBACKUP_DBNAME=host=pgmaster port=5432 user=postgres"
-#    restart: unless-stopped
+  pgslave:
+    image: hub.xenit.eu/postgres:9.6.6
+    volumes:
+    - pgslave:/var/lib/postgresql/data
+    environment:
+    - "PGCONF_log_line_prefix='%t [%p]: [%l-1] db=%d,user=%u,app=%a,client=%h '"
+    - PGCONF_log_checkpoints=on
+    - PGCONF_log_connections=on
+    - PGCONF_log_disconnections=on
+    - PGCONF_log_lock_waits=on
+    - PGCONF_log_temp_files=0
+    - PGCONF_log_autovacuum_min_duration=0
+    - PGCONF_log_error_verbosity=default
+    - PGCONF_log_min_duration_statement=100
+    - "PGCONF_wal_level=hot_standby"
+    - "PGCONF_max_wal_senders=20"
+    - "PGCONF_max_replication_slots=20"
+    - PGCONF_hot_standby=on
+    - PGHBAREPLACE=true
+    - PGHBA_1=local all all trust
+    - PGHBA_2=host all all 127.0.0.1/32 trust
+    - PGHBA_3=host all all all md5
+    - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
+    - "PG_BASEBACKUP_DBNAME=host=pgmaster port=5432 user=postgres"
+    restart: unless-stopped
 
   jodconverter:
     image: hub.xenit.eu/jodconverter-ws

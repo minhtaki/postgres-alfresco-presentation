@@ -3,7 +3,7 @@ version: '3'
 services:
 
   alfresco-core:
-    image: hub.xenit.eu/alfresco-ethias:latest
+    image: hub.xenit.eu/alfresco-enterprise-war-core:5.2
     volumes:
     - alfresco:/opt/alfresco/alf_data
     restart: unless-stopped
@@ -14,7 +14,7 @@ services:
     - DB_NAME=alfresco
     - DB_USERNAME=alfresco
     - DB_PASSWORD=admin
-    - DB_URL=jdbc:postgresql://pgrecovery:5432/alfresco
+    - DB_URL=jdbc:postgresql://postgres:5432,pgrecovery:5432/alfresco
     - DB_DRIVER=org.postgresql.Driver
     - SOLR_HOST=solr
     - SOLR_PORT=8082
@@ -39,6 +39,7 @@ services:
     volumes:
     - postgres:/var/lib/postgresql/data
     - wal_archive:/wal_archive
+    - ./wal_archive_permissions.sh:/before-init/wal_archive_permissions.sh
     environment:
     - POSTGRES_USER=alfresco
     - POSTGRES_PASSWORD=admin
@@ -52,19 +53,18 @@ services:
     - PGCONF_log_autovacuum_min_duration=0
     - PGCONF_log_error_verbosity=default
     - PGCONF_log_min_duration_statement=100
-#    - PGCONF_log_duration=on
-    - "PGCONF_shared_preload_libraries=pglogical"
-    - "PGCONF_wal_level=logical"
+    - "PGCONF_wal_level=hot_standby"
     - "PGCONF_max_wal_senders=20"
     - "PGCONF_max_replication_slots=20"
     - PGCONF_hot_standby=on
     - PGCONF_archive_mode=on
-    - "PGCONF_archive_command='test ! -f /wal_archive/%f && cp %p /wal_archive/%f'"
+    - "PGCONF_archive_command=test ! -f /wal_archive/%f && cp %p /wal_archive/%f"
+#    - PGCONF_archive_timeout=10
     - PGHBAREPLACE=true
     - PGHBA_1=local all all trust
     - PGHBA_2=host all all 127.0.0.1/32 trust
     - PGHBA_3=host all all all md5
-    - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
+    - PGHBA_4=host replication postgres 172.0.0.0 255.0.0.0 trust
     restart: unless-stopped
 
   pgrecovery:
@@ -82,9 +82,7 @@ services:
     - PGCONF_log_autovacuum_min_duration=0
     - PGCONF_log_error_verbosity=default
     - PGCONF_log_min_duration_statement=100
-#    - PGCONF_log_duration=on
-    - "PGCONF_shared_preload_libraries=pglogical"
-    - "PGCONF_wal_level=logical"
+    - "PGCONF_wal_level=hot_standby"
     - "PGCONF_max_wal_senders=20"
     - "PGCONF_max_replication_slots=20"
     - PGCONF_hot_standby=on
@@ -92,7 +90,7 @@ services:
     - PGHBA_1=local all all trust
     - PGHBA_2=host all all 127.0.0.1/32 trust
     - PGHBA_3=host all all all md5
-    - PGHBA_4=host replication postgres 172.18.0.0 255.255.255.0 trust
+    - PGHBA_4=host replication postgres 172.0.0.0 255.0.0.0 trust
     - "PG_BASEBACKUP_DBNAME=host=postgres port=5432 user=postgres"
     restart: unless-stopped
 
