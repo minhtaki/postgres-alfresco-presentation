@@ -120,7 +120,7 @@
             <pre>postgresql.conf:
                 <code data-trim data-noescape>
                 archive_mode = on
-                archive_command = 'test ! -f /wal_archive/%f && cp %p /wal_archive/%f'
+                archive_command = 'test ! -f /wal_archive/%f && <br /> cp %p /wal_archive/%f'
             </code>
             </pre>
         </section>
@@ -189,7 +189,7 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Sources</h2>
-            <ul>
+            <ul style="word-break: break-all">
                 <li><a href="https://blog.2ndquadrant.com/evolution-of-fault-tolerance-in-postgresql-replication-phase/">https://blog.2ndquadrant.com/evolution-of-fault-tolerance-in-postgresql-replication-phase/</a></li>
                 <li><a href="https://www.postgresql.org/docs">https://www.postgresql.org/docs</a></li>
                 <li><a href="https://rosenfeld.herokuapp.com/en/articles/infrastructure/2017-11-10-upgrading-postgresql-from-9-6-to-10-with-minimal-downtime-using-pglogical">https://rosenfeld.herokuapp.com/en/articles/infrastructure/2017-11-10-upgrading-postgresql-from-9-6-to-10-with-minimal-downtime-using-pglogical</a> </li>
