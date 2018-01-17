@@ -82,7 +82,6 @@
             <code data-trim data-noescape>
             wal_level = hot_standby # or higher
             max_wal_senders = 20
-            max_replication_slots = 20
             </code>
             </pre>
         </section>
@@ -109,9 +108,14 @@
 
         <section data-background-image="images/default_background.png" data-background-size="contain">
             <h2 style="color: black;">Streaming backup</h2>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Streaming backup</h2>
             <ul>
                 <li>start from a base backup</li>
                 <li>archive the wal files</li>
+                <li>regular bookkeeping (use a tool)</li>
             </ul>
         </section>
 
@@ -194,6 +198,11 @@
                 <li><a href="https://www.postgresql.org/docs">https://www.postgresql.org/docs</a></li>
                 <li><a href="https://rosenfeld.herokuapp.com/en/articles/infrastructure/2017-11-10-upgrading-postgresql-from-9-6-to-10-with-minimal-downtime-using-pglogical">https://rosenfeld.herokuapp.com/en/articles/infrastructure/2017-11-10-upgrading-postgresql-from-9-6-to-10-with-minimal-downtime-using-pglogical</a> </li>
             </ul>
+        </section>
+
+        <section data-background-image="images/default_background.png" data-background-size="contain">
+            <h2 style="color: black;">Thank you!</h2>
+            <a href="https://github.com/thijslemmens/postgres-alfresco-presentation">https://github.com/thijslemmens/postgres-alfresco-presentation</a>
         </section>
 
     </div>
